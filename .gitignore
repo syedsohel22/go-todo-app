@@ -1,0 +1,15 @@
+# Go
+/go-todo-app       # The binary executable
+*.exe              # Windows executables
+*.o                # Object files
+
+# Test files
+*_test
+testdata
+
+# IDE-specific files
+.idea/
+.vscode/
+
+# Other
+.env               # Your environment variables file (for security)

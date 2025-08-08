@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Go To-do App</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+      }
+      .todo-item {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        border-bottom: 1px solid #eee;
+        padding: 10px 0;
+      }
+      .todo-item.done span {
+        text-decoration: line-through;
+        color: #888;
+      }
+      .todo-item form {
+        margin: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Go To-do App</h1>
+
+    <form action="/add" method="POST">
+      <input
+        type="text"
+        name="title"
+        placeholder="Add a new to-do..."
+        required
+      />
+      <button type="submit">Add</button>
+    </form>
+
+    {{range .}}
+    <div class="todo-item {{if .Done}}done{{end}}">
+      <span>{{.Title}}</span>
+      <div>
+        <form action="/toggle" method="POST" style="display: inline">
+          <input type="hidden" name="id" value="{{.ID}}" />
+          <button type="submit">{{if .Done}}Undo{{else}}Done{{end}}</button>
+        </form>
+        <form action="/delete" method="POST" style="display: inline">
+          <input type="hidden" name="id" value="{{.ID}}" />
+          <button type="submit">Delete</button>
+        </form>
+      </div>
+    </div>
+    {{end}}
+  </body>
+</html>
